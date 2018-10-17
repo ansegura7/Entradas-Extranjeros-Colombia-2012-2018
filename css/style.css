@@ -1,0 +1,42 @@
+#divContent {
+	width:100%;
+}
+#divContent h1 {
+	color: steelblue;
+}
+#divHeader {
+	width:900px; font-family: sans-serif; font-size: 16px; margin-bottom: 10px;
+}
+#divHeader p {
+	margin: 0px; padding: 0px; font-size: 14pt; font-family: sans-serif; color: black;
+}
+#divMain {
+	width:900px; min-height: 100px; border: 0px solid gray; padding:10px 0 10px 0; font-family: sans-serif; font-size: 13pt;
+}
+#divReadme {
+	width:900px; min-height: 100px; border: 0px solid gray; padding:10px 0 10px 0; font-family: sans-serif; font-size: 13pt;
+}
+.divText #cmdAggrType, .divText #cmdCurrYear {
+	margin-right:30px;
+}
+.divText {
+	width:900px; min-height:30px; border: 0px solid steelblue; margin:20px 0 5px 0;
+}
+.divText p {
+	margin: 0 0 10px 0; text-align: left; text-align: justify;
+}
+.svgChart {
+	width:900px; height:500px; border: 1px solid steelblue;
+}
+.divSubTitle {
+	font-family: sans-serif; font-size: 10pt; color: blue; margin-top:2px;
+}
+.zeroline {
+	fill: none; stroke: steelblue; stroke-width: 0.5px; stroke-dasharray: 5 5;
+}
+.zerolinetext {
+	fill: steelblue;
+}
+.displayNone {
+	display:none;
+}
