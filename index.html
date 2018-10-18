@@ -44,20 +44,26 @@
 					</div>
 				</div>
 
-				<!-- Chart 1: Hemisphere Annual Means Temperature -->
+				<!-- Chart 1: Ingresos de extranjeros a Colombia por genero -->
 				<div class="divText" >
 					<p>En los últimos años ha aumentado considerablemente el movimiento migratorio en Colombia, como se puede observar en la siguiente gráfica. Tanto los hombres, como las mujeres mantienen una distribución similar en su incremento. Entonces, a qué se debe dicho incremento?</p>
 				</div>
 				<div class="divText" align="left" >
 					<label>Ver datos desde:</label>
-					<select id="cmdYearFrom" onchange="ast.createLineChart()" >			
+					<select id="cmdYearFrom" onchange="ast.createTemporalChart()" >			
 					</select>
 				</div>
-				
 				<svg id="svgLineChart1" class="svgChart" ></svg>
-				<div class="divSubTitle">Gráfico 1 - Ingresos de extranjeros a Colombia por mes.</div>
+				<div class="divSubTitle">Gráfico 1 - Ingresos de extranjeros a Colombia por genero.</div>
 
-				<!-- Chart 2: Zonal Annual Means Temperature -->
+				<!-- Chart 2: Ingresos de extranjeros a Colombia por país -->
+				<div class="divText">
+					<p></p>
+				</div>
+				<svg id="svgStackedArea1" class="svgChart" ></svg>
+				<div class="divSubTitle">Gráfico 2 - Ingresos de extranjeros a Colombia por país.</div>
+
+				<!-- Chart 3: Ingreso de extranjero a Colombia por país para 1 año en específico -->
 				<div class="divText" >
 					<p>En el siguiente gráfico, se pueden ver disgregados la cantidad de personas que han entrado a Colombia, por país, para un año en espacífico.</p>
 				</div>
@@ -73,13 +79,13 @@
 					</select>
 				</div>
 				<svg id="svgBarChart1" class="svgChart" ></svg>
-				<div class="divSubTitle">Gráfico 2 - Temperatura anual promedio por zonas de latitud.</div>
+				<div class="divSubTitle">Gráfico 3 - Ingreso de extranjero a Colombia por país para 1 año en específico.</div>
 				
+				<!-- Table 1: Cantidad de Población por Países -->
 				<div class="divText" align="center">
 					<table id="tbPopByCountry" class="display" width="100%"></table>
 					<div class="divSubTitle">Tabla 1 - Cantidad de Población por Países.</div>
 				</div>
-				
 				<div class="divText" >
 					<p>Tanto en la figura 1 como en la 2, se puede observar claramente, que la temperatura promedio de la tierra ha aumentado drásticamente, con una pendiente aún mayor en el hemisferio (o zonas) norte.</p>
 				</div>
@@ -193,6 +199,7 @@
 					setTimeout( () => { ast.init() }, 10);
 				});
 			</script>
+
 		</div>
 	</body>
 </html>

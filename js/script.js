@@ -13,8 +13,8 @@ ast.init = () => {
 
 	// Load main ComboBox
 	var yearList = [2018, 2017, 2016, 2015, 2014, 2013, 2012];
-	ast.addComboBoxData("#cmdYearFrom", yearList, yearList[0]);
-	ast.addComboBoxData("#cmdYearCurr", yearList, yearList[0]);
+	ast.addComboBoxData("#cmdYearFrom", yearList, yearList[1]);
+	ast.addComboBoxData("#cmdYearCurr", yearList, yearList[1]);
 	
 	// Fire main event
 	ast.loadData();
@@ -24,8 +24,6 @@ ast.init = () => {
 ast.loadData = () => {
 	let filepath = "https://raw.githubusercontent.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018/master/data/";
 	let filename = filepath + "entradas_extranjeros_colombia_con_fecha.csv";
-
-	ast.data = [];
 	
 	d3.csv(filename).then(
 		function(data) {
@@ -43,7 +41,7 @@ ast.loadData = () => {
 				ast.data.push(d);
 			});
 
-			ast.createLineChart();
+			ast.createTemporalChart();
 			ast.createBarChart();
 		},
 		function(error) {
@@ -54,30 +52,42 @@ ast.loadData = () => {
 }
 
 // Create all of Line Charts
-ast.createLineChart = () => {
+ast.createTemporalChart = () => {
 
-	// Filter
+	// Get Filter
 	let yearFrom = d3.select("#cmdYearFrom").node().value.trim();
 
-	// Filter data
+	// Filtering data
 	let filterData = ast.data.filter(function (d) {
 		return (d.year >= yearFrom);
 	});
+	// console.log("Filted Data");	console.log(filterData);
 
-	// Aggregate data
+	// Create agregated data
 	let aggData = ast.aggregateData(filterData, "date");
+	// console.log("Aggregated Data");	console.log(aggData);
 
-	// Chart 1 - Line chart
-	let svgLineChart1 = d3.select("#svgLineChart1");
+	// Create stacked data
+	let stackedData = filterData.map(({nationality, total, date}) => ({name: nationality, value: total, date: new Date(date)}));
+	// console.log("Stacked Data"); console.log(stackedData);
+
+	// Charts variables
 	let xVar = "date";
 	let yVar = "pop_income";
 	let xTitle = "Date";
 	let yTitle = "Población";
-	let cTitle = "Ingresos por Género";
+	let cTitle;
+
+	// Chart 1 - Line chart
+	let svgLineChart1 = d3.select("#svgLineChart1");
 	let varList = ["female", "male", "undefined", "total"];
-	let cutValue = 0;
+	cTitle = "Histórico de Ingresos por Género";
 	ast.doMSLineChart(aggData, svgLineChart1, ast.maxItems, xVar, yVar, varList, xTitle, yTitle, cTitle);
-	//ast.addLineToChart(ast.data, svgLineChart1, ast.maxItems, xVar, "", cutValue, "series");
+
+	// Chart 2 - Stacked Area
+	let svgStackedArea1 = d3.select("#svgStackedArea1");
+	cTitle = "Histórico de Ingresos por Países";
+	ast.doStackedArea(stackedData, svgStackedArea1, xVar, yVar, varList, xTitle, yTitle, cTitle);
 }
 
 // Create all of Bar Charts
@@ -87,7 +97,7 @@ ast.createBarChart = () => {
 	let yearCurr = d3.select("#cmdYearCurr").node().value.trim();
 	let chartType = d3.select("#cmdChartType").node().value.trim();
 	let multiple = (1 / chartType);
-	console.log("yearCurr: " + yearCurr + ", multiple: " + multiple)
+	
 	// Filter data
 	let filterData = ast.data.filter(function (d) {
 		return (d.year == yearCurr);
@@ -107,7 +117,6 @@ ast.createBarChart = () => {
 	let sColor = "steelblue";
 	let cutValue = 0;
 	ast.doHorzBarChart(aggData, svgBarChart1, ast.maxItems, xVar, yVar, xTitle, yTitle, cTitle, sColor);
-	//ast.addLineToChart(rawdata, svgBarChart1, ast.maxItems, xVar, yVar, cutValue, "single");
 
 	// Create table
 	if (ast.table) {
@@ -132,7 +141,6 @@ ast.doMSLineChart = (rawdata, svg, maxItems, xVar, yVar, varList, xTitle, yTitle
 
 	const margin = {top: 50, right: 20, bottom: 50, left: 50},
 		iwidth = ast.width - margin.left - margin.right,
-		pwidth = 30,
 		iheight = ast.height - margin.top - margin.bottom;
 
 	// Manipulate data
@@ -344,7 +352,6 @@ ast.doVertBarChart = (rawdata, svg, xVar, yVar, xTitle, yTitle, cTitle, sColor) 
 
 	const margin = {top: 50, right: 20, bottom: 50, left: 60},
 		iwidth = ast.width - margin.left - margin.right,
-		pwidth = 30,
 		iheight = ast.height - margin.top - margin.bottom;
 	
 	// Manipulate data
@@ -425,7 +432,6 @@ ast.doHorzBarChart = (rawdata, svg, maxItems, xVar, yVar, xTitle, yTitle, cTitle
 
 	const margin = {top: 50, right: 20, bottom: 50, left: 200},
 		iwidth = ast.width - margin.left - margin.right,
-		pwidth = 30,
 		iheight = ast.height - margin.top - margin.bottom;
 	
 	// Manipulate data
@@ -501,11 +507,168 @@ ast.doHorzBarChart = (rawdata, svg, maxItems, xVar, yVar, xTitle, yTitle, cTitle
 	return svg.node();	
 }
 
+// Create a Stacked Area chart into a SVG tag
+ast.doStackedArea = (data, svg, xVar, yVar, xTitle, yTitle, cTitle, sColor) => {
+	svg.html("");
+
+	const margin = {top: 40, right: 35, bottom: 30, left: 15},
+		iwidth = ast.width - margin.left - margin.right,
+		iheight = ast.height - margin.bottom;
+
+	// Function: multisum data
+	var multisum = function(entries) {
+		return multimap(entries, (p, v) => p + v, () => 0);
+	}
+
+	// Function: Multimap
+	var multimap = function(entries, reducer = (p, v) => (p.push(v), p), initializer = () => []) {
+		const map = new Map();
+		for (const [key, value] of entries) {
+	    	map.set(key, reducer(map.has(key) ? map.get(key) : initializer(), value));
+		}
+		return map;
+	}
+
+	// Function: Create Legend
+	var legend = function(svg) {
+		const g = svg
+			.attr("font-family", "sans-serif")
+			.attr("font-size", 10)
+			.selectAll("g")
+			.data(color.domain().slice().reverse())
+			.enter().append("g")
+			.attr("transform", (d, i) => `translate(0,${i * 16})`);
+
+		g.append("rect")
+			.attr("width", 15)
+			.attr("height", 15)
+			.attr("fill", color);
+
+		g.append("text")
+			.attr("x", 20)
+			.attr("y", 8)
+			.attr("dy", "0.35em")
+			.text(d => d);
+	}
+
+	// Compute the top nine countries, plus an “Other” category
+	const top = [...multisum(data.map(d => [d.name, d.value]))]
+		.sort((a, b) => b[1] - a[1])
+		.slice(0, 9)
+		.map(d => d[0])
+		.concat("Other");
+
+	// Group the data by industry, then re-order the data by descending value.
+	const series = multimap(data.map(d => [d.name, d]));
+	data = [].concat(...top.map(name => series.get(name)));
+	data.pop()
+
+	// Fold any removed (non-top) countries into the Other category
+	const other = [];
+	series.get(top[0]).forEach(function(d){
+		other.push({name:"Other", value: 0, date: d.date});
+	});
+
+	for (const [name, data] of series) {
+		if (!top.includes(name)) {
+	    	for (let i = 0, n = data.length; i < n; ++i) {
+	        	if (i < other.length && +other[i].date == +data[i].date)
+	        		other[i].value += data[i].value;
+			}
+		}
+	}
+	data = data.concat(other);
+
+	// Compute the stack offsets
+	const stack = d3.stack()
+		.keys(top)
+	    .value((d, key) => d.get(key).value)
+	    (Array.from(
+	    	multimap(
+	        	data.map(d => [+d.date, d]),
+	        	(p, v) => p.set(v.name, v),
+	        	() => new Map
+			).values()
+		));
+
+	// Copy the offsets back into the data
+	for (const layer of stack) {
+		for (const d of layer) {
+	    	d.data.get(layer.key).values = [d[0], d[1]];
+		}
+	}
+
+	// Color scale
+	let color = d3.scaleOrdinal(d3.schemeCategory10)
+		.domain(data.map(d => d.name));
+
+	// X scale (time)
+	let x = d3.scaleTime()
+		.domain(d3.extent(data, d => d.date))
+		.range([margin.left, iwidth]);
+
+	// Y scale (linear)
+	let y = d3.scaleLinear()
+		.domain([0, d3.max(data, d => d.values[1])])
+		.range([iheight, margin.top]);
+	
+	// X axis function
+	xAxis = (g) => g
+	  .attr("transform", `translate(0,${iheight})`)
+	  .call(d3.axisBottom(x).ticks(iwidth / 80).tickSizeOuter(0));
+	
+	// Y axis function
+	yAxis = (g) => g
+	  .attr("transform", `translate(${iwidth},0)`)
+	  .call(d3.axisRight(y))
+	  .call(g => g.select(".domain").remove());
+	
+	let area = d3.area()
+		.curve(d3.curveStep)
+	    .x(d => x(d.date))
+	    .y0(d => y(d.values[0]))
+	    .y1(d => y(d.values[1]));
+
+	// Adding areas
+	svg.append("g")
+		.selectAll("path")
+		.data([...multimap(data.map(d => [d.name, d]))])
+		.enter().append("path")
+	    	.attr("fill", ([name]) => color(name))
+			.attr("d", ([, values]) => area(values))
+		.append("title")
+	    	.text(([name]) => name);
+
+	// Adding X axis
+	svg.append("g")
+		.call(xAxis);
+
+	// Adding Y axis
+	svg.append("g")
+		.call(yAxis);
+
+	// Adding Legend
+	svg.append("g")
+		.attr("transform", `translate(${10},${10})`)
+	    .call(legend);
+
+	// // Adding title
+	// svg.append("g")
+	// 	.append("text")
+	// 	.attr("x", (iwidth / 2))
+	// 	.attr("y", (10 - margin.top))
+	// 	.attr("dy", "1em")
+	// 	.style("text-anchor", "middle")
+	// 	.style("font-family", "sans-serif")
+	// 	.style("font-size", "16pt")
+	// 	.text(cTitle)
+	// 	.style("color", "steelblue");
+}
+
 // Adding a line to chart
 ast.addLineToChart = (rawdata, svg, maxItems, xVar, yVar, cutValue, chartType) => {
 	const margin = {top: 50, right: 20, bottom: 50, left: 50},
 		iwidth = ast.width - margin.left - margin.right,
-		pwidth = 30,
 		iheight = ast.height - margin.top - margin.bottom;
 
 	// Manipulate data
@@ -687,7 +850,7 @@ ast.toFixedNumber = (value, mult, dec) => {
 
 // IsNumeric function in Javascript
 ast.isNumeric = (n) => {
-  return !isNaN(parseFloat(n)) && isFinite(n);
+	return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 // Get distinct values from JSON array
