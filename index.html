@@ -3,91 +3,100 @@
 	Estudiante: Andres Segura Tinoco
 	Código: 201711582
 	Curso: Visual Analytics
-	Tarea 3
-	Fecha: 25/9/2018
+	Tarea 4
+	Fecha: 19/10/2018
 	Licencia: MIT
 	-->
 <html lang="en">
 	<header>
 		<meta charset="utf-8">
-		<title>VA - Tarea 3</title>
+		<title>VA - Tarea 4</title>
 
 		<!-- Scripts -->
-		<script src="https://d3js.org/d3.v5.min.js"></script>
-		<script src="https://d3js.org/d3-format.v1.min.js"></script>
+		<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" language="javascript" src="https://d3js.org/d3.v5.min.js"></script>
+		<script type="text/javascript" language="javascript" src="https://d3js.org/d3-format.v1.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 
 		<!-- Style -->
-		<link rel="stylesheet" href="css/style.css" >
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css" >
 	</header>
 	<body>
 		<div id="divContent" align="center">
 			<div id="divHeader" align="left" >
-				<h1>Consecuencias del Precio del Barril de Petróleo en Colombia (2007-2018)</h1>
+				<h1>A qué se debe el Incremento de Visitas en Colombia?</h1>
 				<p>Estudiante: Andres Segura Tinoco</p>
 				<p>Código: 201711582</p>
 				<p>Curso: Visual Analytics</p>
-				<p>Tarea 3</p>
-				<p>Fecha: 25/9/2018</p>
-				<p>Licencia: <a target="_blank" href="https://github.com/ansegura7/PrecioBarrilPerforacionProduccion-2007-2018/blob/master/LICENSE">MIT</a></p>
+				<p>Tarea 4: Uso de Datos Temporales</p>
+				<p>Fecha: 19/10/2018</p>
+				<p>Licencia: <a target="_blank" href="https://github.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018/blob/master/LICENSE">MIT</a></p>
 			</div>
 
 			<div id="divMain" align="center" >
 
 				<div class="divText">
-					<img src="img/main-banner.jpg" />
+					<img src="img/main-banner.jpeg" />
 					<div class="divSubTitle">
-						Image source: <a target="_blank" href="http://oilfieldmagazine.com/as-oil-goes-up-u-s-oil-producers-rush-to-hedge-prices/">Oil Field Magazine</a>.
+						Image source: <a target="_blank" href="https://medium.com/multicultura-inmigrantes-en-chile/las-dos-caras-de-la-inmigraci%C3%B3n-4de64ae16cf2">Las dos caras de la inmigración de Kari Domic</a>.
 					</div>
 				</div>
 
-				<!-- Precio del barril de petróleo -->
+				<!-- Chart 1: Ingresos de extranjeros a Colombia por genero -->
 				<div class="divText" >
-					<p>El precio del barril de petróleo a nivel mundial (por ejemplo, <a target="_blank" href="http://www.oil-price.net/">WTI</a>) afecta positiva o negativamente a distintas industrias y económicas alrededor de todo el mundo.</p>
-					<p>En el siguiente gráfico, se puede observar el comportamiento anual promedio del precio del barril de petróleo entre el 2007 y el 2018, llegando a su valor máximo en el 2008 (casi 100 USD/Barril) y a su valor mínimo en el 2016 (42.75 USD/Barril).</p>
-					<p>Vale la pena mencionar, que el precio del barril de petróleo no se puede controlar facilmente, y está más bien asociado a factores tales como: la OPEP, la Oferta y Demanda del crudo, y la estabilidad o inestabilidad de los países productores de petróleo.</p>
+					<p>En los últimos años ha aumentado considerablemente el movimiento migratorio hacia Colombia. Como se puede observar en la siguiente gráfica, tanto los hombres como las mujeres mantienen una distribución similar en su incremento. ¿Entonces, a qué se debe dicho incremento?</p>
 				</div>
 				<div class="divText" align="left" >
-					<label>Año de Corte:</label>
-					<select id="cmdCutOffYear" onchange="ast.createCharts()" >
-						
+					<label>Ver datos desde:</label>
+					<select id="cmdYearFrom" onchange="ast.createTemporalChart()" >			
 					</select>
 				</div>
 				<svg id="svgLineChart1" class="svgChart" ></svg>
-				<div class="divSubTitle">Gráfico 1 - Precio promedio de barril de petróleo.</div>
+				<div class="divSubTitle">Gráfico 1 - Ingresos de extranjeros a Colombia por genero.</div>
 
-				<!-- Cantidad de pozos perforados -->
+				<!-- Chart 2: Ingresos de extranjeros a Colombia por país -->
+				<div class="divText" style="margin-top: 15px;">
+					<p>En la siguiente imagen (Gráfico 2) se pueden observar los ingresos a Colombia agrupados por países desde el 2012.</p>
+				</div>
+				<svg id="svgStackedArea1" class="svgChart" ></svg>
+				<div class="divSubTitle">Gráfico 2 - Ingresos de extranjeros a Colombia por país.</div>
 				<div class="divText" >
-					<p>Por otro lado, al analizar la figura 2, se puede observar que a partir del 2015 en adelante, hubo una caída considerable en la cantidad de pozos perforados en Colombia. Esto muy probablemente se deba, a la caída en el precio del barril de petróleo en el mismo año, lo cual dejaba a las compañías estatales petroleras con menos CAPEX disponible para invertir en nuevos pozos.</p>
+					<p>Como se puede observar, casi todos los países han mantenido constante su tasa de entradas mensuales hacia Colombia, excepto Venezuela, que debido a los problemas internos y de gobierno que hay en dicho país, ha generado que, en los últimos 2 años, sea el país con mayor cantidad de extranjeros visitando a Colombia por año.</p>
+				</div>
+
+				<!-- Chart 3: Ingreso de extranjero a Colombia por país para 1 año en específico -->
+				<div class="divText" >
+					<p>En el siguiente gráfico, se pueden ver disgregados la cantidad de personas que han entrado a Colombia, por país, para un año en específico.</p>
 				</div>
 				<div class="divText" align="left" >
-					<label>Dirección del Gráfico:</label>
-					<select id="cmdBarChartType" onchange="ast.updateBarChart()" >
-						<option id="vert">Barras Verticales</option>
-						<option id="hort">Barras Horizontales</option>
+					<label>Año Análisis:</label>
+					<select id="cmdYearCurr" onchange="ast.createBarChart()" >			
+					</select>
+					
+					<label>Cantidad:</label>
+					<select id="cmdChartType" onchange="ast.createBarChart()" >
+						<option value="12">Mensual</option>
+						<option value="1">Anual</option>
 					</select>
 				</div>
 				<svg id="svgBarChart1" class="svgChart" ></svg>
-				<div class="divSubTitle">Gráfico 2 - Declive de las perforación en Colombia.</div>
-
-				<!-- Producción promedio de petróleo -->
-				<div class="divText" >
-					<p>Al analizar la figura 3, se puede observar cómo influyó la cantidad de pozos perforados en Colombia desde el 2015, y por ende, el precio del barril de petróleo, en la producción nacional a partir del 2016.</p>
-					<p>Como se puede observar en la figura 3, la producción nacional diaria promedio de petróleo, disminuyo aproximadamente 150,000 bbls (un 15%) del 2015 al 2016, manteniendo una tendencia a la baja en los años posteriores.</p>
+				<div class="divSubTitle">Gráfico 3 - Ingreso de extranjero a Colombia por país para 1 año en específico.</div>
+				
+				<!-- Table 1: Cantidad de Población por Países -->
+				<div class="divText" align="center">
+					<table id="tbPopByCountry" class="display" width="100%"></table>
+					<div class="divSubTitle">Tabla 1 - Cantidad de Población por Países.</div>
 				</div>
-				<svg id="svgLineChart2" class="svgChart" ></svg>
-				<div class="divSubTitle">Gráfico 3 - Producción diaria promedio en Colombia.</div>
-
-				<!-- Producción promedio de petróleo -->
 				<div class="divText" >
-					<p>Por último, al analizar la figura 4, que muestra los ingresos diarios (en USD) por conceptos de venta de petróleo, se observa que es aún más dramático el comportamiento, ya que, si es cierto que la producción petrolera sólo cayó un 15% del 2015 al 2016, el ingreso por venta de petróleo cayó un 46%, afectando notoriamente los presupuestos de la nación.</p>
+					<p>Para finalizar, en el siguiente gráfico, se pueden ver disgregados la cantidad de personas que han entrado a Colombia, por países, para un año en específico.</p>
 				</div>
-				<svg id="svgLineChart3" class="svgChart" ></svg>
-				<div class="divSubTitle">Gráfico 4 - Ingresos diarios promedio derivados de la venta de petróleo en Colombia.</div>
 
-				<div class="divText" >
-					<h3 align="left">Conclusión</h3>
-					<p>Por lo tanto, se puede concluir que existe una estrecha relación entre el precio del barril de petróleo y la cantidad de pozos que se perforan en Colombia anualmente, impactando directamente en la producción Nacional, ya que, a medida que aumente la cantidad de pozos perforados, también aumentarán las probabilidades de mantener o mejorar la producción de petróleo del país.</p>
+				<!-- Conclusion -->
+				<div class="divText" align="left">
+					<h3>Conclusión</h3>
+					<p></p>
 				</div>
 			</div>
 
@@ -97,77 +106,99 @@
 					<h1>Readme</h1>
 
 					<h3>Datos del Proyecto – What</h3>
-					<p>Los datos que se usaron para el proyecto provienen de un dataset del tipo tabla (tables), que contiene las siguientes variables (attrubutes):</p>
+					<p>Los datos que se usaron para este proyecto provienen de los Datos Abiertos de Colombia <a target="_blank" href="https://www.datos.gov.co/Estad-sticas-Nacionales/Entradas-de-extranjeros-a-Colombia/96sh-4v8d/data">www.datos.gov.co</a>, y están compuestos por un dataset del tipo Temporal, que contiene las siguientes variables (attributes):</p>
 					<ul>
-						<li>Year: ordered, quantitative, sequencial.</li>
-						<li>Exploratory_Wells: ordered, quantitative, sequencial.</li>
-						<li>Avg_WTI_Price_USD: ordered, quantitative, sequencial.</li>
-						<li>Avg_Qo_Bbls: ordered, quantitative, sequencial.</li>
-						<li>Ingresos_USD: ordered, quantitative, sequencial.</li>
+						<li>Year: ordered, quantitative, sequencial (no existen fechas menores a 1880).</li>
+						<li>Temperuture: ordered, quantitative, divergent.</li>
 					</ul>
-
-					<p>Dicho dataset objetivo, fue formado a partir de la unión y preprocesamiento de distintas fuentes de datos (todas tomadas de los <a target="_blank" href="https://www.datos.gov.co/">Datos Abiertos de Colombia</a>), que a continuación se enumeran:</p>
+					<p><b>Nota</b>: Entre las distintas variables temperatura usadas están: Glob, NHem, SHem, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov y Dec.</p>
+					
+					<p>A continuación, se listan específicamente los dataset usados en el proyecto:</p>
+					<p>>> Combined Land-Surface Air and Sea-Surface Water Temperature Anomalies (Land-Ocean Temperature Index, LOTI):</p>
 					<ul>
-						<li><a target="_blank" href="https://www.datos.gov.co/Minas-y-Energ-a/Cantidad-Pozos-Exploratorios-Anuales/mgnj-a2mn">Cantidad Pozos Exploratorios Anuales</a></li>
-						<li><a target="_blank" href="https://www.datos.gov.co/Minas-y-Energ-a/Precio-WTI-Promedio-Anual-2010-2018/nb7h-xzbs">Precio WTI Promedio Anual 2010 - 2018</a></li>
-						<li><a target="_blank" href="https://www.datos.gov.co/Minas-y-Energ-a/Produccion-y-Comercializacion-de-Petroleo-y-Gas-20/dssz-yyu7">Producción y Comercialización de Petróleo y Gas 2007- 2013</a></li>
-						<li><a target="_blank" href="https://www.datos.gov.co/Minas-y-Energ-a/Producci-n-Fiscalizada-de-Petr-leo-2013/6c3y-rvm8">Producción Fiscalizada de Petróleo en Colombia para el 2013</a></li>
-						<li><a target="_blank" href="https://www.datos.gov.co/Minas-y-Energ-a/Producci-n-Fiscalizada-de-Petr-leo-2014/gse3-nd4e">Producción Fiscalizada de Petróleo en Colombia para el 2014</a></li>
-						<li><a target="_blank" href="https://www.datos.gov.co/Minas-y-Energ-a/Produccion-Fiscalizada-de-Petr-leo-2015/wr29-8raj">Producción Fiscalizada de Petróleo en Colombia para el 2015</a></li>
-						<li><a target="_blank" href="https://www.datos.gov.co/Minas-y-Energ-a/Produccion-Fiscalizada-de-Petr-leo-2016/qq7g-e4zr">Producción Fiscalizada de Petróleo en Colombia para el 2016</a></li>
-						<li><a target="_blank" href="https://www.datos.gov.co/Minas-y-Energ-a/Producci-n-Fiscalizada-de-Petr-leo-2017/xhmd-pcpc">Producción Fiscalizada de Petróleo en Colombia para el 2017</a></li>
+						<li>Global-mean monthly, seasonal, and annual means, 1880-present, updated through most recent month: <a target="_blank" href="https://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt">TXT</a></li>
+						<li>Zonal annual means, 1880-present, updated through most recent complete year: <a target="_blank" href="https://data.giss.nasa.gov/gistemp/tabledata_v3/ZonAnn.Ts+dSST.txt">TXT</a></li>
+					</ul>
+					<p>>> Global Mean Estimates Based on Land-Surface Air Temperature Anomalies Only (Meteorological Station Data, dTs):</p>
+					<ul>
+						<li>Global-mean monthly, seasonal, and annual means, 1880-present, updated through most recent month: <a target="_blank" href="https://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts.txt">TXT</a></li>
+						<li>Zonal annual means, 1880-present, updated through most recent complete year: <a target="_blank" href="https://data.giss.nasa.gov/gistemp/tabledata_v3/ZonAnn.Ts.txt">TXT</a></li>
+					</ul>
+					
+					<p><b>Citation</b></p>
+					<p>When referencing the GISTEMP data provided here, please cite both this webpage and also our most recent scholarly publication about the data. In citing the webpage, be sure to include the date of access.</p>
+					<ul>
+						<li>GISTEMP Team, 2018: GISS Surface Temperature Analysis (GISTEMP). NASA Goddard Institute for Space Studies. Dataset accessed 20YY-MM-DD at <a target="_blank" href="https://data.giss.nasa.gov/gistemp/">https://data.giss.nasa.gov/gistemp/</a>.</li>
+						<li>Hansen, J., R. Ruedy, M. Sato, and K. Lo, 2010: <a target="_blank" href="https://pubs.giss.nasa.gov/abs/ha00510u.html">Global surface temperature change</a>, Rev. Geophys., 48, RG4004, doi:10.1029/2010RG000345.</li>
 					</ul>
 
 					<h3>Objetivos del Proyecto - Why</h3>
-					<p>Crear una visualización web que permita identificar (<b>identify</b>) la dependencia (<b>dependency</b>) que existe entre el precio del barril de petróleo y la producción diaria de petróleo en Colombia.</p>
-					<p>También, que la Viz permita comparar (<b>compare</b>) las tendencias (<b>trends</b>) del precio del barril de petróleo contra la cantidad de pozos perforados en Colombia.</p>
-					<p>Por último, que la Viz presente (<b>present</b>) la tendencia (<b>trend</b>) de los ingresos nacionales por conceptos de venta de petróleo, con el objetivo de resaltar el impacto (positivo o negativo) que tiene el precio del barril de petróleo en los ingresos de la Nación.</p>
+					<p>Tarea Principal: Crear una visualización web que presente (<b>present</b>) la tendencia (<b>trend</b>) de la temperatura de la tierra a través del tiempo (1880-2018), para impactar y concientizar a las personas del Calentamiento Global.</p>
+					<p>Además, crear una Viz que permita comparar (<b>compare</b>) entre sí, las tendencias (<b>trends</b>) de la temperatura promedio, por hemisferios y zonas, a través del tiempo.</p>
+					<p>También, que la Viz permita identificar (<b>identify</b>) anomalías (<b>outliers</b>) que existe en la temperatura promedio de la tierra, por hemisferio y zonas, así como por años o meses.</p>
+					<p>Por último, que la Viz permita identificar (<b>identify</b>) la distribución (<b>distribution</b>) de la temperatura promedio por mes para un año en específico (Gráfico 3).</p>
 
 					<h3>Marcas y Canales – How</h3>
-					<p>En los 3 gráficos de líneas, se usaron como marcas puntos conectados por líneas. Tanto los datos del eje X como los del eje Y están ordenados secuencialmente. En cada gráfico se usó un color distinto, asociado a la naturaleza del dato que se deseaba mostrar, por ejemplo, verde para el petróleo, verde oscuro para la venta de petróleo y negro el precio del barril de petróleo.</p>
-					<p>Con respecto al gráfico de barras, se usaron como marcas líneas verticales ordenadas tanto en el eje Y (para expresar cantidad), como en el eje X (secuencialmente por año) para mayor entendimiento de los datos.</p>
+					<p>En los 3 gráficos de líneas, se usaron como marcas puntos conectados por líneas. Tanto los datos del eje X como los del eje Y están ordenados secuencialmente. En cada gráfico se usó la escala de colores de D3, para ayudar al usuario a diferenciar claramente las series.</p>
+					<p>Con respecto al gráfico de barras, se usaron como marcas líneas verticales ordenadas tanto en el eje Y (para expresar cantidad), como en el eje X (secuencialmente por mes) para mayor entendimiento de los datos.</p>
 					<p>En todos los gráficos se usó la posición vertical, para mostrar el tamaño del valor que se deseaba graficar. Además, también se usó en cada gráfico un título y un subtítulo descriptivo, para ayudar al usuario a entender la información que se está visualizando.</p>
+					<p>La visualización cuenta con múltiples filtros (por tipos de datos, cantidad de datos, año de análisis) para reducir los datos y ayudar al usuario a realizar un mejor análisis.</p>
+					<p>Por último, pero no menos importante, se usó como encabezado de la Visualización un título descriptivo con imagen que llamara la atención del usuario.</p>
 					
 					<h3>Insights</h3>
 					<ul>
-						<li>Efectivamente existe una dependencia entre el precio del barril de petróleo y la producción diaria de petróleo en Colombia. Cuando el precio del barril está alto, Colombia invierte más en nuevas perforaciones, lo cual influye directamente en la cantidad de barriles de petróleo que se producirán en los próximos meses, que al final, significa más dinero para la Nación.</li>
-						<li>En qué año comenzó la caída en el precio del barril de petróleo a nivel mundial: año 2014.</li>
-						<li>En qué año comenzó la caída de la tasa de producción diaria de petróleo en Colombia: año 2015.</li>
-						<li>De cuanto fue la caída en los ingresos diarios por concepto de venta de petróleo en Colombia: del 2014 al 2015 fue del 46%.</li>
+						<li>La temperatura global promedio de la tierra está en constante aumento, tanto en el hemisferio norte como en el sur. Este es el fenómeno conocido como: Calentamiento Global.</li>
+						<li>A partir de 1992 la temperatura promedio de la tierra ha aumentado más, que desde 1880 (año en que empezó la medición) hasta 1991.</li>
+						<li>Aunque inicialmente la temperatura promedio del hemisferio norte era más baja que la del hemisferio sur, a partir de 1900 la tendencia se invirtió. Esto se puede validar en el gráfico 1 y especialmente, en el gráfico 2, en donde la temperatura se discrimina por zonas de latitud.</li>
+						<li>De 1989 a 1992, la temperatura promedio de la tierra disminuyó considerablemente, lo cual coincide con la caída del muero de Berlín y el fin de la Guerra Fría.</li>
+						<li>A partir de 1992 aproximadamente, la temperatura de los 2 hemisferios ha mantenido la misma pendiente y proporción.</li>
 					</ul>
 
 					<h3>Tecnologías Usadas</h3>
 					<p>Para el desarrollo del proyecto se usaron las siguientes tecnologías:</p>
 					<ul>
-						<li>Se usó Sublime Text 3 como IDE de desarrollo.</li>
-						<li>HTML y CSS, para maquetar el sitio web.</li>
-						<li>Javascript y el framework d3.js para crear los gráficos (de barras y de líneas) y la respectiva interacción con ellos.</li>
-						<li>GitHub para almacenar el código de la Viz, y de los datos usados. A continuación el enlace a dicho repositorio principal del proyecto: <a target="_blank" href="https://github.com/ansegura7/PrecioBarrilPerforacionProduccion-2007-2018">PrecioBarril-Perforacion-Produccion-2007-2018</a></li>
+						<li>Se usó Sublime Text 3 y Notepad++ como IDEs de desarrollo.</li>
+						<li>HTML y CSS para maquetar el sitio web.</li>
+						<li>Javascript y el framework D3.js para crear los gráficos (de barras y de líneas) y la respectiva interacción con ellos.</li>
+						<li>JQuery para crear la tabla con la información de las zonas de latitud.</li>
+						<li>GitHub para almacenar el código de la Viz, y de los datos usados. A continuación, el enlace a dicho repositorio principal del proyecto: <a target="_blank" href="https://github.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018">Entradas-Extranjeros-Colombia-2012-2018</a></li>
 					</ul>
 
-					<h3>Prerrequisitos y Uso</h3>
-					<p>El proyecto sólo depende del acceso a los datos almacenados en el repositorio https://github.com/ansegura7/PrecioBarrilPerforacionProduccion-2007-2018 y a la disponibilidad del servicio de GitHub Pages, que permite el acceso por medio de un Navegador a la página principal proyecto.</p>
-					<p>Todos los gráficos muestran el año de análisis seleccionado (con una línea roja punteada), dicho año se puede cambiar con el ComboBox: "Año de Corte".</p>
-					<p>El gráfico de barras depende de la opción seleccionada en el ComboBox: "Dirección del Gráfico".</p>
-
+					<h3>Prerrequisitos</h3>
+					<p>El proyecto depende del acceso a los datos almacenados en el repositorio https://github.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018 y a la disponibilidad del servicio de GitHub Pages, que permite el acceso por medio de un Navegador a la página principal proyecto.</p>
+					<p>Además, al usar los frameworks D3.js y JQuery, depende de que dichas librerías estén disponibles para ser usadas on-line.</p>
+					
+					<h3>Uso</h3>
+					<ul>
+						<li>La visualización se cargará completa al ingresar su URL en un navegador web.</li>
+						<li>Se puede seleccionar el tipo de dato que se desea usar, en el combo-box <b>Tipo de Dato</b>.</li>
+						<li>Se puede seleccionar la cantidad de datos que se desean visualizar, en el combo-box <b>Ver últimos N años</b>.</li>
+						<li>Para el gráfico 3 (temperatura mensual), se puede seleccionar el año de los datos, en el combo-box <b>Año de análisis</b>.</li>
+						<li>Para el gráfico 3 (temperatura mensual), se puede seleccionar el tipo de gráfico entre Line y Bar, en el combo-box <b>Tipo de Gráfico</b>.</li>
+					</ul>
+					
 					<h3>Autores</h3>
-					<p>El autor de los datos es la "Agencia Nacional de Hidrocarburos" del Estado. Los datos están actualizados hasta mediados del 2018.</p>
+					<p>El autor de los datos es la <b>NASA</b>. Los datos van desde 1880 hasta el 2018.</p>
 					<p>El autor de la visualización es Andrés Segura Tinoco, CE 201711582.</p>
 
 					<h3>Screenshot</h3>
 					<p>En el siguiente repositorio, se encuentran algunos screenshots del proyecto:</p>
-					<a target="_blank" href="https://github.com/ansegura7/PrecioBarrilPerforacionProduccion-2007-2018/tree/master/screenshots">GitHub Screenshots</a>
+					<a target="_blank" href="https://github.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018/tree/master/screenshot">GitHub Screenshots</a>
 
-					<h3>Licencia</h3>
-					<p>Este proyecto está bajo la licencia <a target="_blank" href="https://github.com/ansegura7/PrecioBarrilPerforacionProduccion-2007-2018/blob/master/LICENSE">MIT</a>.</p>
+					<h3>Links de Interés</h3>
+					<p>Video de Youtube: <a target="_blank" href="https://youtu.be/ezkcyjspbyY">https://youtu.be/ezkcyjspbyY</a>.</p>
+					<p>Tweet: <a target="_blank" href="https://twitter.com/SeguraAndres7/status/1049729210607173632">https://twitter.com/SeguraAndres7/status/1049729210607173632</a>.</p>
 				</div>
 
 			</div>
 
 			<script type="text/javascript">
 		        // Run Page Script
-				setTimeout( () => { ast.init()	}, 50);
+				$(document).ready(function() {
+					setTimeout( () => { ast.init() }, 10);
+				});
 			</script>
+
 		</div>
 	</body>
 </html>
