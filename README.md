@@ -106,6 +106,7 @@ A continuación, se presentan unos pantallazo del proyecto:
 ![alt text](https://raw.githubusercontent.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018/master/screenshots/Figure4.PNG)
 
 ## Links de Interés
-- Video de Youtube: https://youtu.be/ezkcyjspbyY
-- Tweet: https://twitter.com/SeguraAndres7/status/1049729210607173632
+- Video de Youtube: 
+- Presentación: https://docs.google.com/presentation/d/1uTgu2ezjly-Jgk8KbBrowOju5uIAgDq-sQZ8wjBMhGQ/edit?usp=sharing
+- Tweet: https://twitter.com/SeguraAndres7/status/1053102842939084800
 ##
