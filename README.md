@@ -34,26 +34,27 @@ TP1: Crear una visualización web que permita comparar (compare) las tendencias 
 ### Tareas Secundarias
 TS1: Identificar (identify) valores anómalos (outliers) de los ingresos de extranjeros en Colombia, por meses o por años.
 
-TS2: Sumarizar (summarize) el comportamiento global (distribution) de todos los ingresos de personas a Colombia en el tiempo.
+TS2: Sumarizar (summarize) el comportamiento global (distribution o trend) de todos los ingresos de personas a Colombia en el tiempo.
 
 TS3: Por último, comparar (compare) específicamente el volumen (distribution) de ingresos de población por países para un año en específico.
 
 TS4: Derivar (derive) una nueva variable (feature) llamado "date", a partir de la fecha y mes de cada registro. Esta variable será usada en los gráficos temporales.
 
 ## Marcas y Canales – How
-Para la TP1 y la TS1 se utilizó un Line Chart con el siguiente modismo:
+Para la TP1 y la TS1 se utilizó un Multi-series Line chart con el siguiente modismo:
 
 - Marcas: puntos unidos por líneas.
 - Canales: longitud con respecto al eje vertical, para expresar la cantidad de visitas de extranjeros. Color hue para diferenciar las categorías del género.
 - How-Encode: arrange express en ambos ejes.
+- How-Facet: múltiples curvas superpuestas.
 
-Para la TS2 se utilizó un Stacked Area Chart con el siguiente modismo:
-- Marcas: áreas o formas (shapes).
+Para la TS2 se utilizó un Stacked Area chart con el siguiente modismo:
+- Marcas: áreas o formas (shapes) continuas.
 - Canales: longitud con respecto al eje vertical, para expresar la cantidad de visitas de extranjeros. Color hue para diferenciar las categorías de los países.
 - How-Encode: arrange express en ambos ejes.
 - How-Reduce: Aggregate.
 
-Para la TS3 se utilizó un Horizont Chart y una Table, con el siguiente modismo:
+Para la TS3 se utilizó un Horizont chart y una Table, con el siguiente modismo:
 - Marcas: líneas horizontales.
 - Canales: longitud para expresar la cantidad de entradas de extranjeros al país.
 - How-Encode: Separete, Order y Align.
@@ -68,6 +69,7 @@ Por último, pero no menos importante, se usó como encabezado de la Visualizaci
 - La mayoría de los países, han mantenido casi constante (en los últimos 6 años) su tasa de viajeros hacia Colombia por mes, excepto Venezuela, que ha aumentado considerablemente el número de entradas, de aproximadamente 40mil al mes en el 2016 a 115mil al mes en el 2018.
 - Hasta el 2016, USA fue el país del cual Colombia recibía más visitas por año, pero a partir del 2017, la tendencia cambió, y ahora es Venezuela.
 - Colombia pasó de recibir aproximadamente 150mil visitas de extranjeros al mes en el 2012 a recibir más de 310mil al mes en el 2018.
+- En los últimos 5 años, el Top 10 de la nacionalidad de los extranjeros que visitan a Colombia es de países del continente americano.
 
 ## Tecnologías Usadas
 Para el desarrollo del proyecto se usaron las siguientes tecnologías:
@@ -75,7 +77,7 @@ Para el desarrollo del proyecto se usaron las siguientes tecnologías:
 - Se usó Sublime Text 3 y Notepad++ como IDEs de desarrollo.
 - HTML y CSS para maquetar el sitio web.
 - Javascript y el framework D3.js para crear los gráficos (de barras y de líneas) y la respectiva interacción con ellos.
-- JQuery para crear la tabla con la información de las zonas de latitud.
+- JQuery para crear la tabla con la información del ingreso de extranjeros a Colombia por países.
 - GitHub para almacenar el código de la Viz, y de los datos usados.
 
 ## Prerrequisitos
@@ -85,12 +87,12 @@ Además, al usar los frameworks D3.js y JQuery, depende de que dichas librerías
 
 ## Uso
 - La visualización se cargará completa al ingresar su URL en un navegador web.
-- Se puede seleccionar el año a partir del cual se mostrarán los datos de los gráficos de tiempo, en el combo-box Ver datos desde.
-- Para el gráfico 3, se puede seleccionar el año de los datos, en el combo-box Año de análisis.
-- Para el gráfico 3, se puede seleccionar el tipo de gráfico entre Mensual y Anual, en el combo-box Tipo de Gráfico.
+- Se puede seleccionar el año a partir del cual se mostrarán los datos de los gráficos de tiempo, en el combo-box Ver datos desde. Esta interacción, afectará a los gráficos 1 y 2.
+- Para el gráfico 3 y la tabla 1, se puede seleccionar el año de los datos, en el combo-box Año de análisis.
+- Para el gráfico 3 y la tabla 1, se puede seleccionar el tipo de gráfico entre Mensual y Anual, en el combo-box Tipo de Gráfico.
 
 ## Autores
-El autor de los datos es el Gobierno Nacional. Los datos están actualizados hasta junio del 2018.
+El autor de los datos es el Gobierno Nacional y la oficina de Migración de Colombia. Los datos están actualizados hasta junio del 2018.
 
 El autor de la visualización es Andrés Segura Tinoco, CE 201711582.
 
