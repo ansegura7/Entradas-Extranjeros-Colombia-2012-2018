@@ -87,7 +87,7 @@
 				<!-- Table 1: Cantidad de Población por Países -->
 				<div class="divText" align="center">
 					<table id="tbPopByCountry" class="display" width="100%"></table>
-					<div class="divSubTitle">Tabla 1 - Cantidad de Población por Países.</div>
+					<div class="divSubTitle">Tabla 1 - Ingreso de extranjeros a Colombia por países.</div>
 				</div>
 
 				<!-- Conclusion -->
@@ -122,27 +122,28 @@
 					<p>TP1: Crear una visualización web que permita comparar (<b>compare</b>) las tendencias (<b>trend</b>) de los ingresos de extranjeros a Colombia, por género y por países.</p>
 					<p><b>Tareas Secundarias</b></p>
 					<p>TS1: Identificar (<b>identify</b>) valores anómalos (<b>outliers</b>) de los ingresos de extranjeros en Colombia, por meses o por años.</p>
-					<p>TS2: Sumarizar (<b>summarize</b>) el comportamiento global (<b>distribution</b>) de todos los ingresos de personas a Colombia en el tiempo.</p>
+					<p>TS2: Sumarizar (<b>summarize</b>) el comportamiento global (<b>distribution</b> o <b>trend</b>) de todos los ingresos de personas a Colombia en el tiempo.</p>
 					<p>TS3: Por último, comparar (<b>compare</b>) específicamente el volumen (<b>distribution</b>) de ingresos de población por países para un año en específico.</p>
 					<p>TS4: Derivar (<b>derive</b>) una nueva variable (<b>feature</b>) llamado "date", a partir de la fecha y mes de cada registro. Esta variable será usada en los gráficos temporales.</p>
 
 					<h3>Marcas y Canales – How</h3>
-					<p>Para la TP1 y la TS1 se utilizó un Line Chart con el siguiente modismo:</p>
+					<p>Para la TP1 y la TS1 se utilizó un Multi-series Line chart con el siguiente modismo:</p>
 					<ul>
 						<li>Marcas: puntos unidos por líneas.</li>
 						<li>Canales: longitud con respecto al eje vertical, para expresar la cantidad de visitas de extranjeros. Color hue para diferenciar las categorías del género.</li>
 						<li>How-Encode: arrange express en ambos ejes.</li>
+						<li>How-Facet: múltiples curvas superpuestas.</li>
 					</ul>
 
-					<p>Para la TS2 se utilizó un Stacked Area Chart con el siguiente modismo:</p>
+					<p>Para la TS2 se utilizó un Stacked Area chart con el siguiente modismo:</p>
 					<ul>
-						<li>Marcas: áreas o formas (shapes).</li>
+						<li>Marcas: áreas o formas (shapes) continuas.</li>
 						<li>Canales: longitud con respecto al eje vertical, para expresar la cantidad de visitas de extranjeros. Color hue para diferenciar las categorías de los países.</li>
 						<li>How-Encode: arrange express en ambos ejes.</li>
 						<li>How-Reduce: Aggregate.</li>
 					</ul>
 
-					<p>Para la TS3 se utilizó un Horizont Chart y una Table, con el siguiente modismo:</p>
+					<p>Para la TS3 se utilizó un Horizont chart y una Table, con el siguiente modismo:</p>
 					<ul>
 						<li>Marcas: líneas horizontales.</li>
 						<li>Canales: longitud para expresar la cantidad de entradas de extranjeros al país.</li>
@@ -159,6 +160,7 @@
 						<li>La mayoría de los países, han mantenido casi constante (en los últimos 6 años) su tasa de viajeros hacia Colombia por mes, excepto Venezuela, que ha aumentado considerablemente el número de entradas, de aproximadamente 40mil al mes en el 2016 a 115mil al mes en el 2018.</li>
 						<li>Hasta el 2016, USA fue el país del cual Colombia recibía más visitas por año, pero a partir del 2017, la tendencia cambió, y ahora es Venezuela.</li>
 						<li>Colombia pasó de recibir aproximadamente 150mil visitas de extranjeros al mes en el 2012 a recibir más de 310mil al mes en el 2018.</li>
+						<li>En los últimos 5 años, el Top 10 de la nacionalidad de los extranjeros que visitan a Colombia es de países del continente americano.</li>
 					</ul>
 
 					<h3>Tecnologías Usadas</h3>
@@ -167,7 +169,7 @@
 						<li>Se usó Sublime Text 3 y Notepad++ como IDEs de desarrollo.</li>
 						<li>HTML y CSS para maquetar el sitio web.</li>
 						<li>Javascript y el framework D3.js para crear los gráficos (de barras y de líneas) y la respectiva interacción con ellos.</li>
-						<li>JQuery para crear la tabla con la información de las zonas de latitud.</li>
+						<li>JQuery para crear la tabla con la información del ingreso de extranjeros a Colombia por países.</li>
 						<li>GitHub para almacenar el código de la Viz, y de los datos usados. A continuación, el enlace a dicho repositorio principal del proyecto: <a target="_blank" href="https://github.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018">Entradas-Extranjeros-Colombia-2012-2018</a></li>
 					</ul>
 
@@ -178,13 +180,13 @@
 					<h3>Uso</h3>
 					<ul>
 						<li>La visualización se cargará completa al ingresar su URL en un navegador web.</li>
-						<li>Se puede seleccionar el año a partir del cual se mostrarán los datos de los gráficos de tiempo, en el combo-box <b>Ver datos desde</b>.</li>
-						<li>Para el gráfico 3, se puede seleccionar el año de los datos, en el combo-box <b>Año de análisis</b>.</li>
-						<li>Para el gráfico 3, se puede seleccionar el tipo de gráfico entre Mensual y Anual, en el combo-box <b>Tipo de Gráfico</b>.</li>
+						<li>Se puede seleccionar el año a partir del cual se mostrarán los datos de los gráficos de tiempo, en el combo-box <b>Ver datos desde</b>. Esta interacción, afectará a los gráficos 1 y 2.</li>
+						<li>Para el gráfico 3 y la tabla 1, se puede seleccionar el año de los datos, en el combo-box <b>Año de análisis</b>.</li>
+						<li>Para el gráfico 3 y la tabla 1, se puede seleccionar el tipo de gráfico entre Mensual y Anual, en el combo-box <b>Tipo de Gráfico</b>.</li>
 					</ul>
 					
 					<h3>Autores</h3>
-					<p>El autor de los datos es el Gobierno Nacional. Los datos están actualizados hasta junio del 2018.</p>
+					<p>El autor de los datos es el Gobierno Nacional y la oficina de Migración de Colombia. Los datos están actualizados hasta junio del 2018.</p>
 					<p>El autor de la visualización es Andrés Segura Tinoco, CE 201711582.</p>
 
 					<h3>Screenshot</h3>
@@ -192,7 +194,8 @@
 					<a target="_blank" href="https://github.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018/tree/master/screenshots">GitHub Screenshots</a>
 
 					<h3>Links de Interés</h3>
-					<p>Video de Youtube: <a target="_blank" href="https://youtu.be/ezkcyjspbyY">https://youtu.be/ezkcyjspbyY</a>.</p>
+					<p>Video de Youtube: <a target="_blank" href="#">(Blank)</a>.</p>
+					<p>Presentación: <a target="_blank" href="https://docs.google.com/presentation/d/1uTgu2ezjly-Jgk8KbBrowOju5uIAgDq-sQZ8wjBMhGQ/edit?usp=sharing">Google Slides</a>.</p>
 					<p>Tweet: <a target="_blank" href="https://twitter.com/SeguraAndres7/status/1049729210607173632">https://twitter.com/SeguraAndres7/status/1049729210607173632</a>.</p>
 				</div>
 
