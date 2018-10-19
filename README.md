@@ -76,7 +76,7 @@ Para el desarrollo del proyecto se usaron las siguientes tecnologías:
 - HTML y CSS para maquetar el sitio web.
 - Javascript y el framework D3.js para crear los gráficos (de barras y de líneas) y la respectiva interacción con ellos.
 - JQuery para crear la tabla con la información de las zonas de latitud.
-- GitHub para almacenar el código de la Viz, y de los datos usados. A continuación, el enlace a dicho repositorio principal del proyecto: https://github.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018
+- GitHub para almacenar el código de la Viz, y de los datos usados.
 
 ## Prerrequisitos
 El proyecto depende del acceso a los datos almacenados en el repositorio https://github.com/ansegura7/Entradas-Extranjeros-Colombia-2012-2018 y a la disponibilidad del servicio de GitHub Pages, que permite el acceso por medio de un Navegador a la página principal proyecto.
